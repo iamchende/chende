@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cd.dao.PurchaseDao">
+  <resultMap id="BaseResultMap" type="cn.cd.entity.Purchase">    
+  	<id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="material" property="material" jdbcType="VARCHAR" />
+    <result column="totals" property="totals" jdbcType="INTEGER" />
+    <result column="buying_price" property="buyingPrice" jdbcType="DOUBLE" />
+    <result column="total_buying_price" property="totalBuyingPrice" jdbcType="DOUBLE" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="import_time" property="importTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List">
+    id, name, material, totals, buying_price, total_buying_price, color, size, type, import_time, remark
+  </sql>
+  <insert id="insert" parameterType="cn.cd.entity.Purchase">
+  	insert into purchase(name, material, totals, buying_price, total_buying_price, color, size, type, import_time, remark) 
+  	values(#{name, jdbcType=VARCHAR}, #{material, jdbcType=VARCHAR}, #{totals, jdbcType=INTEGER}, #{buyingPrice, jdbcType=DOUBLE}, #{totalBuyingPrice, jdbcType=DOUBLE}, 
+  	#{color, jdbcType=VARCHAR}, #{size, jdbcType=VARCHAR}, #{type, jdbcType=INTEGER}, #{importTime, jdbcType=TIMESTAMP}, #{remark, jdbcType=VARCHAR})
+  </insert>
+  <delete id="delete" parameterType="java.lang.Long">
+  	update purchase set is_delete='Y' where id=#{id, jdbcType=BIGINT}
+  </delete>
+  <update id="update" parameterType="cn.cd.entity.Purchase">
+  	update purchase
+  	<set>
+  		<if test="name != null"> name=#{name, jdbcType=VARCHAR}, </if>
+  		<if test="material != null"> material=#{material, jdbcType=VARCHAR}, </if>
+  		<if test="totals != null"> totals=#{totals, jdbcType=INTEGER}, </if>
+  		<if test="buyingPrice != null"> buying_price=#{buyingPrice, jdbcType=DOUBLE}, </if>
+  		<if test="totalBuyingPrice != null"> total_buying_price=#{totalBuyingPrice, jdbcType=DOUBLE}, </if>
+  		<if test="color != null"> color=#{color, jdbcType=VARCHAR}, </if>
+  		<if test="size != null"> size=#{size, jdbcType=VARCHAR}, </if>
+  		<if test="type != null"> type=#{type, jdbcType=INTEGER}, </if>
+  		<if test="importTime != null"> import_time=#{importTime, jdbcType=TIMESTAMP}, </if>
+  		<if test="remark != null"> remark=#{remark, jdbcType=VARCHAR}, </if>
+  	</set>
+  	where id=#{id, jdbcType=BIGINT}
+  </update>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from purchase 
+  	where is_delete='N' and id=#{id, jdbcType=BIGINT}
+  </select>
+  <select id="selectByCondition" parameterType="cn.cd.common.Condition" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from purchase  
+  	where is_delete='N'
+  	<if test="name != null">
+        And name = #{name,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

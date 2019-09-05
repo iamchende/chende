@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "text": "销售",
+      "icon": "&#xe620;",
+      "subset": [
+        {
+          "text": "按钮",
+          "icon": "&#xe621;",
+          "href": "demo/btn.html"
+        }
+      ]
+    },{
+      "text": "进货",
+      "icon": "&#xe628;",
+      "href": "",
+      "subset": [
+        {
+          "text": "进货入库",
+          "icon": "&#xe621;",
+          "href": "i_purchase"
+        }
+      ]
+    },{
+        "text": "统计",
+        "icon": "&#xe624;",
+        "href": "",
+        "subset": [
+          {
+            "text": "销量统计",
+            "icon": "&#xe621;",
+            "href": "demo/map.html"
+          },{
+            "text": "销售分析",
+            "icon": "&#xe621;",
+            "href": "demo/add-edit.html"
+          },{
+              "text": "库存查询",
+              "icon": "&#xe621;",
+              "href": "demo/add-edit.html"
+            }
+        ]
+      },{
+      "text": "子窗口操作",
+      "icon": "&#xe638;",
+      "href": "demo/children.html"
+    },{
+      "text": "联系服务",
+      "icon": "&#xe601;",
+      "target": true,
+      "href": "#"
+    }
+  ]
+}

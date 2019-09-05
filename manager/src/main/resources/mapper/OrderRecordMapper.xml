@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cd.dao.OrderRecordDao">
+  <resultMap id="BaseResultMap" type="cn.cd.entity.OrderRecord">    
+  	<id column="id" property="id" jdbcType="BIGINT" />
+    <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+    <result column="purchase_id" property="purchaseId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="material" property="material" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="sell_time" property="sellTime" jdbcType="TIMESTAMP" />
+    <result column="gross_profit" property="grossProfit" jdbcType="DOUBLE" />
+    <result column="payment_method" property="paymentMethod" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List">
+    id, goods_id, purchase_id, name, type, material, color, size, price, sell_time, gross_profit, payment_method, remark
+  </sql>
+  <insert id="insert" parameterType="cn.cd.entity.OrderRecord">
+  	insert into order_record(goods_id, purchase_id, name, type, material, color, size, price, sell_time, gross_profit, payment_method, remark) 
+  	values(#{goodsId, jdbcType=BIGINT}, #{purchaseId, jdbcType=BIGINT}, #{name, jdbcType=VARCHAR}, #{type, jdbcType=BIGINT}, #{material, jdbcType=VARCHAR}, #{color, jdbcType=VARCHAR}, 
+  	#{size, jdbcType=INTEGER}, #{price, jdbcType=DOUBLE}, #{sellTime, jdbcType=TIMESTAMP}, #{gross_profit, jdbcType=DOUBLE}, #{payment_method, jdbcType=INTEGER}, #{remark, jdbcType=VARCHAR})
+  </insert>
+  <delete id="delete" parameterType="java.lang.Long">
+  	update order_record set is_delete='Y' where id=#{id, jdbcType=BIGINT}
+  </delete>
+  <update id="update" parameterType="cn.cd.entity.OrderRecord">
+  	update order_record
+  	<set>
+  		<if test="goodsId != null"> goods_id=#{goodsId, jdbcType=BIGINT}, </if>
+  		<if test="purchaseId != null"> goods_id=#{purchaseId, jdbcType=BIGINT}, </if>
+  		<if test="name != null"> name=#{name, jdbcType=VARCHAR}, </if>
+  		<if test="type != null"> type=#{name, jdbcType=INTEGER}, </if>
+  		<if test="material != null"> material=#{name, jdbcType=VARCHAR}, </if>
+  		<if test="color != null"> color=#{name, jdbcType=VARCHAR}, </if>
+  		<if test="size != null"> size=#{size, jdbcType=VARCHAR}, </if>
+  		<if test="price != null"> price=#{price, jdbcType=DOUBLE}, </if>
+  		<if test="sellTime != null"> sell_time=#{sellTime, jdbcType=TIMESTAMP}, </if>
+  		<if test="gross_profit != null"> gross_profit=#{grossProfit, jdbcType=DOUBLE}, </if>
+  		<if test="payment_method != null"> payment_method=#{paymentMethod, jdbcType=INTEGER}, </if>
+  		<if test="remark != null"> remark=#{name, jdbcType=VARCHAR}, </if>
+  	</set>
+  	where id=#{id, jdbcType=BIGINT}
+  </update>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from order_record 
+  	where is_delete='N' and id=#{id, jdbcType=BIGINT}
+  </select>
+  <select id="selectByCodition" parameterType="cn.cd.common.Condition" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from order_record 
+  	where is_delete='N'
+  	<if test="name != null">
+        And name = #{name,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cd.dao.GoodsDao">
+  <resultMap id="BaseResultMap" type="cn.cd.entity.Goods">    
+  	<id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="purchase_id" property="purchaseId" jdbcType="BIGINT" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="material" property="material" jdbcType="VARCHAR" />
+    <result column="selling_price" property="sellingPrice" jdbcType="DOUBLE" />
+    <result column="simple_surplus" property="simpleSurplus" jdbcType="INTEGER" />
+    <result column="imperfections" property="imperfections" jdbcType="INTEGER" />
+    <result column="surplus" property="surplus" jdbcType="INTEGER" />
+    <result column="last_sell_time" property="lastSellTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List">
+    id, name, purchase_id, color, size, type, material, selling_price, simple_surplus, imperfections, surplus, last_sell_time, remark
+  </sql>
+  <insert id="insert" parameterType="cn.cd.entity.Goods">
+  	insert into goods(name, purchase_id, color, size, type, material, selling_price, simple_surplus, imperfections, surplus, last_sell_time, remark) 
+  	values(#{name, jdbcType=VARCHAR}, #{purchaseId, jdbcType=BIGINT}, #{color, jdbcType=VARCHAR}, #{size, jdbcType=VARCHAR}, #{type, jdbcType=INTEGER}, #{material, jdbcType=VARCHAR}, 
+  	#{sellingPrice, jdbcType=DOUBLE}, #{simpleSurplus, jdbcType=INTEGER}, #{imperfections, jdbcType=INTEGER}, #{surplus, jdbcType=INTEGER}, #{lastSellTime, jdbcType=TIMESTAMP}, #{remark, jdbcType=VARCHAR})
+  </insert>
+  <delete id="delete" parameterType="java.lang.Long">
+  	update goods set is_delete='Y' where id=#{id, jdbcType=BIGINT}
+  </delete>
+  <update id="update" parameterType="cn.cd.entity.Goods">
+  	update goods
+  	<set>
+  		<if test="name != null"> name=#{name, jdbcType=VARCHAR}, </if>
+  		<if test="purchaseId != null"> purchase_id=#{purchaseId, jdbcType=BIGINT}, </if>
+  		<if test="color != null"> color=#{color, jdbcType=VARCHAR}, </if>
+  		<if test="size != null"> size=#{size, jdbcType=VARCHAR}, </if>
+  		<if test="type != null"> type=#{type, jdbcType=INTEGER}, </if>
+  		<if test="material != null"> material=#{material, jdbcType=VARCHAR}, </if>
+  		<if test="sellingPrice != null"> selling_price=#{sellingPrice, jdbcType=DOUBLE}, </if>
+  		<if test="simpleSurplus != null"> simple_surplus=#{simpleSurplus, jdbcType=INTEGER}, </if>
+  		<if test="imperfections != null"> imperfections=#{imperfections, jdbcType=INTEGER}, </if>
+  		<if test="surplus != null"> surplus=#{surplus, jdbcType=INTEGER}, </if>
+  		<if test="lastSellTime != null"> last_sell_time=#{lastSellTime, jdbcType=TIMESTAMP}, </if>
+  		<if test="remark != null"> remark=#{remark, jdbcType=VARCHAR}, </if>
+  	</set>
+  	where id=#{id, jdbcType=BIGINT}
+  </update>
+  <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from goods 
+  	where is_delete='N' and id=#{id, jdbcType=BIGINT}
+  </select>
+  <select id="selectByCodition" parameterType="cn.cd.common.Condition" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from goods 
+  	where is_delete='N'
+  	<if test="name != null">
+        And name = #{name,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

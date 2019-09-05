@@ -1,0 +1,32 @@
+/*[17:24:19][   0 ms]*/ SET NAMES 'utf8';
+/*[17:24:19][   0 ms]*/ SET sql_mode='';
+/*[17:24:19][  15 ms]*/ SHOW DATABASES;
+/*[17:24:26][   0 ms]*/ USE `xuzhen`;
+/*[17:24:27][  16 ms]*/ SHOW FULL TABLES FROM `xuzhen` WHERE table_type = 'BASE TABLE';
+
+/*[17:34:21][ 468 ms]*/ CREATE TABLE `xuzhen`.`goods`(     `id` BIGINT NOT NULL AUTO_INCREMENT ,     `name` VARCHAR(100) ,     `purchase_id` BIGINT ,     `color` VARCHAR(10) ,     `size` VARCHAR(5) ,     `type` INT ,     `material` VARCHAR(20) ,     `selling_price` DOUBLE ,     `simple_surplus` INT ,     `imperfections` INT ,     `surplus` INT ,     `sell_time` DATE ,     `remark` VARCHAR(100) ,     `is_delete` CHAR(1) DEFAULT 'N' NOT NULL,	PRIMARY KEY (`id`)  );
+/*[17:34:27][  16 ms]*/ SHOW FULL TABLES FROM `xuzhen` WHERE table_type = 'BASE TABLE';
+
+/*[17:42:47][ 234 ms]*/ CREATE TABLE `xuzhen`.`purchase`(     `id` BIGINT NOT NULL AUTO_INCREMENT ,     `name` VARCHAR(100) ,     `material` VARCHAR(20) ,     `totals` INT ,     `buying_price` DOUBLE ,     `total_buying_price` DOUBLE ,     `color` VARCHAR(120) ,     `size` VARCHAR(100) ,	`type` INT NULL,     `import_time` DATE ,     `remark` VARCHAR(100) ,     `is_delete` CHAR(1) DEFAULT 'N' NOT NULL,		PRIMARY KEY (`id`)  );
+/*[17:42:53][  16 ms]*/ SHOW FULL TABLES FROM `xuzhen` WHERE table_type = 'BASE TABLE';
+
+/*[17:46:46][ 265 ms]*/ CREATE TABLE `xuzhen`.`order_record`(     `id` BIGINT NOT NULL AUTO_INCREMENT ,		`goods_id` BIGINT NULL,     `name` VARCHAR(100) ,     `type` INT ,     `material` VARCHAR(20) ,     `color` VARCHAR(5) ,     `size` VARCHAR(4) ,     `price` DOUBLE ,     `sell_time` DATE ,     `gross_profit` DOUBLE ,     `remark` VARCHAR(100) ,     `payment_method` INT ,     `is_delete` CHAR(1) DEFAULT 'N' NOT NULL,		PRIMARY KEY (`id`)  );
+/*[17:46:50][   0 ms]*/ SHOW FULL TABLES FROM `xuzhen` WHERE table_type = 'BASE TABLE';
+
+/*[19:52:44][ 140 ms]*/ CREATE TABLE `xuzhen`.`clothing_type`(     `code` INT NOT NULL ,     `name` VARCHAR(50) ,     `is_delete` CHAR(1) DEFAULT 'N' NOT NULL,		PRIMARY KEY (`code`)  );
+/*[20:00:39][  15 ms]*/ INSERT INTO `xuzhen`.`clothing_type`(`code`,`name`) VALUES ( '0','上衣');
+/*[20:00:46][  93 ms]*/ INSERT INTO `xuzhen`.`clothing_type`(`code`,`name`) VALUES ( '1','裤子');
+/*[20:00:55][  31 ms]*/ INSERT INTO `xuzhen`.`clothing_type`(`code`,`name`) VALUES ( '2','羽绒服');
+/*[19:54:43][ 390 ms]*/ CREATE TABLE `xuzhen`.`material_type`(     `code` INT NOT NULL ,     `name` VARCHAR(50) ,     `is_delete` CHAR(1) DEFAULT 'N' NOT NULL,		PRIMARY KEY (`code`)  );
+/*[20:01:25][  47 ms]*/ INSERT INTO `xuzhen`.`material_type`(`code`,`name`) VALUES ( '0','棉');
+/*[20:01:35][ 109 ms]*/ INSERT INTO `xuzhen`.`material_type`(`code`,`name`) VALUES ( '1','麻');
+/*[20:01:50][  47 ms]*/ INSERT INTO `xuzhen`.`material_type`(`code`,`name`) VALUES ( '2','尼龙');
+/*[19:55:24][ 202 ms]*/ CREATE TABLE `xuzhen`.`color_type`(     `code` INT NOT NULL ,     `name` VARCHAR(50) ,     `is_delete` CHAR(1) DEFAULT 'N' NOT NULL,		PRIMARY KEY (`code`)  );
+/*[19:59:32][ 172 ms]*/ INSERT INTO `xuzhen`.`color_type`(`code`,`name`) VALUES ( '0','红');
+/*[19:59:39][ 172 ms]*/ INSERT INTO `xuzhen`.`color_type`(`code`,`name`) VALUES ( '1','绿');
+/*[19:59:56][  78 ms]*/ INSERT INTO `xuzhen`.`color_type`(`code`,`name`) VALUES ( '2','蓝');
+/*[19:56:01][ 219 ms]*/ CREATE TABLE `xuzhen`.`size_type`(     `code` INT NOT NULL ,     `name` VARCHAR(50) ,     `is_delete` CHAR(1) DEFAULT 'N' NOT NULL,		PRIMARY KEY (`code`)  );
+/*[20:02:24][  31 ms]*/ INSERT INTO `xuzhen`.`size_type`(`code`,`name`) VALUES ( '0','S');
+/*[20:02:30][ 188 ms]*/ INSERT INTO `xuzhen`.`size_type`(`code`,`name`) VALUES ( '1','M');
+/*[20:02:35][ 109 ms]*/ INSERT INTO `xuzhen`.`size_type`(`code`,`name`) VALUES ( '2','L');
+/*[20:02:43][  94 ms]*/ INSERT INTO `xuzhen`.`size_type`(`code`,`name`) VALUES ( '3','XL');

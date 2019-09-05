@@ -33,4 +33,20 @@ public class BatchImportTaskDTO {
      * 上传者
      */
     private String creator;
+    /**
+     * 修改者
+     */
+    private String modifier;
+    /**
+     * 当前任务总记录数
+     */
+    private Integer recordNum;
+    /**
+     * 当前任务失败的记录数
+     */
+    private Integer failNum;
+    /**
+     * 当前任务成功的记录数
+     */
+    private Integer successNum;
 }

@@ -25,6 +25,7 @@ public class _190408CommonSort {
         int[] arr5 = new int[arr.length];
         int[] arr6 = new int[arr.length];
         int[] arr7 = new int[arr.length];
+        int[] arr8 = new int[arr.length];
         System.arraycopy(arr, 0, arr1, 0, arr.length);
         bubbleSort1(arr1);
         System.arraycopy(arr, 0, arr2, 0, arr.length);
@@ -38,7 +39,9 @@ public class _190408CommonSort {
         System.arraycopy(arr, 0, arr6, 0, arr.length);
         quickSort(arr6);
         System.arraycopy(arr, 0, arr7, 0, arr.length);
-        selectSort(arr7);
+        selectSort1(arr7);
+        System.arraycopy(arr, 0, arr8, 0, arr.length);
+        selectSort2(arr8);
 
     }
     public void swap(int[] arr,int i, int j){
@@ -221,12 +224,30 @@ public class _190408CommonSort {
      * 依次递归到倒数第二个数和最后一个数比较为止（不一定会交换）。
      * @param arr
      */
-    public void selectSort(int[] arr){
+    public void selectSort1(int[] arr){
         long start = System.currentTimeMillis();
         for(int i=0;i<arr.length;i++){//每次循环取出当前最小值
             for(int j=i+1;j<arr.length;j++){
                 if(arr[i] > arr[j])swap(arr,i,j);
             }
+        }
+        print(arr, start);
+    }
+    /**
+     * 选择排序2.0
+     * 每一轮确定位置了 才交换元素
+     * @param arr
+     */
+    public void selectSort2(int[] arr){
+        long start = System.currentTimeMillis();
+        for(int i=0;i<arr.length;i++){//每次循环取出当前最小值
+        	int index = i;
+            for(int j=i+1;j<arr.length;j++){
+                if(arr[index] > arr[j]){
+                	index = j;
+                }
+            }
+            swap(arr,i,index);
         }
         print(arr, start);
     }

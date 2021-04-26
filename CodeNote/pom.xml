@@ -51,7 +51,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <version>2.7</version>
         </dependency>
         <!-- Base64加密 begin -->
         <!-- 其实jdk1.8也有一个Base64工具 -->
